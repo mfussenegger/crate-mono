@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crate-mono", "crate-mono\crate-mono.csproj", "{E0A6934E-93EF-485E-861F-11440F011D3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crate-mono-test", "crate-mono-test\crate-mono-test.csproj", "{C0FE132B-7D3E-4503-BE31-ACFA0BDB998B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C0FE132B-7D3E-4503-BE31-ACFA0BDB998B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FE132B-7D3E-4503-BE31-ACFA0BDB998B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FE132B-7D3E-4503-BE31-ACFA0BDB998B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FE132B-7D3E-4503-BE31-ACFA0BDB998B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0A6934E-93EF-485E-861F-11440F011D3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0A6934E-93EF-485E-861F-11440F011D3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0A6934E-93EF-485E-861F-11440F011D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0A6934E-93EF-485E-861F-11440F011D3F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = crate-mono\crate-mono.csproj
+	EndGlobalSection
+EndGlobal
