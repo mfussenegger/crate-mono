@@ -11,6 +11,33 @@ namespace Crate
 	public class Test
 	{
 		[Test ()]
+		public void testDefaultConnection ()
+		{
+			var server = new CrateServer();
+			Assert.AreEqual("http", server.Scheme);
+			Assert.AreEqual("localhost", server.Hostname);
+			Assert.AreEqual(4200, server.Port);
+		}
+
+		[Test ()]
+		public void testServerWithoutScheme ()
+		{
+			var server = new CrateServer("localhost:4200");
+			Assert.AreEqual("http", server.Scheme);
+			Assert.AreEqual("localhost", server.Hostname);
+			Assert.AreEqual(4200, server.Port);
+		}
+
+		[Test ()]
+		public void testServerWithoutPort ()
+		{
+			var server = new CrateServer("localhost");
+			Assert.AreEqual("http", server.Scheme);
+			Assert.AreEqual("localhost", server.Hostname);
+			Assert.AreEqual(4200, server.Port);
+		}
+
+		[Test ()]
 		public void testSelect ()
 		{
 			using (var conn = new CrateConnection()) {
@@ -21,6 +48,19 @@ namespace Crate
 					reader.Read();
 					string clusterName = reader.GetString(0);
 					Assert.AreEqual(clusterName, "crate");
+				}
+			}
+		}
+
+		[Test ()]
+		public void testSelectServerRoundrobin()
+		{
+			using (var conn = new CrateConnection("localhost:9999, localhost:4200")) {
+				conn.Open();
+
+				for (int i = 0; i < 10; i++) {
+					string clusterName = conn.Query<string>("select name from sys.cluster").First();
+					Assert.AreEqual("crate", clusterName);
 				}
 			}
 		}

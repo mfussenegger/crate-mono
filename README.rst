@@ -21,8 +21,6 @@ Things missing
 
 Currently this is just a prototype. Things that are missing are:
 
-* connection string handling (currently it just always connects to localhost:4200)
-* server round-robin
 * type infos in the Data Reader
 * DataAdapter class
 * a release and nuget package

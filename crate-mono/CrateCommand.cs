@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace Crate
 {
@@ -61,17 +62,26 @@ namespace Crate
 			return task.Result;
 		}
 
-		protected async Task<SqlResponse> execute()
+		protected async Task<SqlResponse> execute(int currentRetry = 0)
 		{
 			using (var client = new HttpClient()) {
-				var resp = await client.PostAsJsonAsync(
-					connection.sqlUri(),
-					new SqlRequest(CommandText, parameters.Select(x => x.Value).ToArray())
-				);
-				if (!resp.IsSuccessStatusCode) {
-					throw new CrateException(resp.ReasonPhrase + " " + resp.Content.ReadAsStringAsync().Result);
+				var server = connection.nextServer();
+				try {
+					var resp = await client.PostAsJsonAsync(
+						server.sqlUri(),
+						new SqlRequest(CommandText, parameters.Select(x => x.Value).ToArray())
+					);
+					if (!resp.IsSuccessStatusCode) {
+						throw new CrateException(resp.ReasonPhrase + " " + resp.Content.ReadAsStringAsync().Result);
+					}
+					return await resp.Content.ReadAsAsync<SqlResponse>();
+				} catch (WebException) {
+					connection.markAsFailed(server);
+					if (currentRetry > 3) {
+						throw ;
+					}
 				}
-				return await resp.Content.ReadAsAsync<SqlResponse>();
+				return await execute(currentRetry++);
 			}
 		}
 
