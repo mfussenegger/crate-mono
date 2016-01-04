@@ -3,3 +3,6 @@ sudo: false
 
 script:
     - ./build.sh RunTests
+
+notifications:
+    email: false
