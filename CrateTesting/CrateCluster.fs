@@ -26,20 +26,21 @@ module Cluster =
         use archive = TarArchive.CreateInputTarArchive(gzipStream)
         archive.ExtractContents targetUri
 
-    let createProcess fileName arguments =
+    let createProcess fileName =
         let p = new System.Diagnostics.Process()
         p.StartInfo.FileName <- fileName
-        p.StartInfo.Arguments <- arguments
         p
 
-    let bash arguments =
-        createProcess "/bin/bash" arguments
+    let isPosixSystem =
+        match Environment.OSVersion.Platform with
+        | PlatformID.Unix -> true
+        | PlatformID.MacOSX -> true
+        | _ -> false
 
     let crateBinary =
-        match Environment.OSVersion.Platform with
-        | PlatformID.Unix -> "crate"
-        | PlatformID.MacOSX -> "crate"
-        | _ -> "crate.bat"
+        match isPosixSystem with
+        | true -> "crate"
+        | false -> "crate.bat"
 
     let tmpFolder =
         Path.Combine(Path.GetTempPath(), "crate-testing")
@@ -62,7 +63,14 @@ module Cluster =
             |> download
             |> extract tmpFolder
 
-        bash binaryPath
+            // extract doesn't set the executable permissions correctly.
+            // There would be Mono.Unix.Native stuff to set the permissions
+            // but well, this hack works also
+            if isPosixSystem then
+                let argument = sprintf "u+x \"%s\"" binaryPath
+                let p = System.Diagnostics.Process.Start("chmod", argument)
+                p.WaitForExit()
+        createProcess binaryPath
 
 
 type CrateCluster(name, version) =
