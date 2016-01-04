@@ -1,0 +1,21 @@
+NUGET
+  remote: https://www.nuget.org/api/v2
+  specs:
+    Dapper (1.42)
+    FAKE (4.12.0)
+    FSharp.Data (2.2.5)
+      Zlib.Portable (>= 1.10.0) - framework: portable-net40+sl50+wp80+win80
+    Microsoft.AspNet.WebApi.Client (5.2.3)
+      Microsoft.Net.Http (>= 2.2.22) - framework: portable-wp80+win+net45+wp81+wpa81
+      Newtonsoft.Json (>= 6.0.4) - framework: >= net45, portable-wp80+win+net45+wp81+wpa81
+    Microsoft.Bcl (1.1.10) - framework: portable-wp80+win+net45+wp81+wpa81
+      Microsoft.Bcl.Build (>= 1.0.14)
+    Microsoft.Bcl.Build (1.0.21) - import_targets: false, framework: portable-wp80+win+net45+wp81+wpa81
+    Microsoft.Net.Http (2.2.29) - framework: portable-wp80+win+net45+wp81+wpa81
+      Microsoft.Bcl (>= 1.1.10)
+      Microsoft.Bcl.Build (>= 1.0.14)
+    Newtonsoft.Json (8.0.1)
+    NUnit (2.6.4)
+    NUnit.Runners (2.6.4)
+    SharpZipLib (0.86.0)
+    Zlib.Portable (1.11.0) - framework: portable-net40+sl50+wp80+win80
