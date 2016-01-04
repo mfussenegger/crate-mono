@@ -3,14 +3,33 @@ using System.Data;
 using Dapper;
 using System.Linq;
 using NUnit.Framework;
+using Crate.Testing;
 
 namespace Crate
 {
 	public class IntegrationTest
 	{
-		// TODO: re-enable once test setup is integrated
-		/*
-		[Test ()]
+        private static CrateCluster CLUSTER = null;
+
+        [TestFixtureSetUp]
+        public static void setUpCrateCluster()
+        {
+            if (CLUSTER == null) {
+                CLUSTER = new CrateCluster("crate-testing", "0.52.4");
+                CLUSTER.Start();
+            }
+        }
+
+        [TestFixtureTearDown]
+        public static void tearDownCrateCluster()
+        {
+            if (CLUSTER != null) {
+                CLUSTER.Stop();
+                CLUSTER = null;
+            }
+        }
+
+		[Test]
 		public void testSelect ()
 		{
 			using (var conn = new CrateConnection()) {
@@ -25,7 +44,7 @@ namespace Crate
 			}
 		}
 
-		[Test ()]
+		[Test]
 		public void testSelectServerRoundrobin()
 		{
 			using (var conn = new CrateConnection("localhost:9999, localhost:4200")) {
@@ -38,7 +57,7 @@ namespace Crate
 			}
 		}
 
-		[Test ()]
+		[Test]
 		public void testWithDapper()
 		{
 			using (var conn = new CrateConnection()) {
@@ -63,7 +82,5 @@ namespace Crate
 				conn.Execute("drop table foo");
 			}
 		}
-		*/
 	}
 }
-

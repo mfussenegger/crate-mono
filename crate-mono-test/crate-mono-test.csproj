@@ -46,6 +46,10 @@
       <Project>{E0A6934E-93EF-485E-861F-11440F011D3F}</Project>
       <Name>crate-mono</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CrateTesting\Crate.Testing.fsproj">
+      <Project>{56ED513A-3CE5-4A1B-AAA9-71F6AB11051A}</Project>
+      <Name>Crate.Testing</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
