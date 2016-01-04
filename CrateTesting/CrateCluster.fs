@@ -1,4 +1,4 @@
-﻿namespace Crate.Testing
+namespace Crate.Testing
 
 open System.Threading
 open FSharp.Data
@@ -29,6 +29,7 @@ module Cluster =
     let createProcess fileName =
         let p = new System.Diagnostics.Process()
         p.StartInfo.FileName <- fileName
+        p.StartInfo.CreateNoWindow <- true
         p
 
     let isPosixSystem =
@@ -53,8 +54,10 @@ module Cluster =
         | Text text -> JsonValue.Parse text
         | Binary bytes -> failwith "expeced text response, not bytes"
 
-    let downloadAndLaunchCrate version =
-        let binaryPath = sprintf "%s/crate-%s/bin/%s" tmpFolder version crateBinary
+    let downloadAndCreateProcess version =
+        let subFolder = "crate-" + version
+        let binaryPath = Path.Combine(tmpFolder, subFolder, "bin", crateBinary)
+        printfn "full path to crate executable: %s" binaryPath
 
         if File.Exists(binaryPath) then
             ()
@@ -77,10 +80,9 @@ type CrateCluster(name, version) =
     let name = name
     let version = version
     let cancellationSource = new CancellationTokenSource()
-    let mutable proc = null
+    let proc = Cluster.downloadAndCreateProcess version
 
     let launchProcess = async {
-        proc <- Cluster.downloadAndLaunchCrate version
         proc.Start() |> ignore
     }
 
@@ -95,12 +97,13 @@ type CrateCluster(name, version) =
             with ex ->
                 printfn "Waiting for cluster to come online"
                 Thread.Sleep(200)
+                if proc.HasExited then
+                    let errorMessage = proc.StandardError.ReadToEnd()
+                    failwith errorMessage
                 ()
 
     member x.Stop() =
-        if proc <> null then
-            proc.Kill()
-            proc <- null
+        proc.Kill()
         cancellationSource.Cancel()
     member x.Start() =
         Async.Start (launchProcess, cancellationSource.Token)
