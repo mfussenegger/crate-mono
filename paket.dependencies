@@ -6,4 +6,3 @@ nuget NUnit ~> 2
 nuget NUnit.Runners ~> 2
 nuget SharpZipLib
 nuget Newtonsoft.Json
-nuget Microsoft.AspNet.WebApi.Client

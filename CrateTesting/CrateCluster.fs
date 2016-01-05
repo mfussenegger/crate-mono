@@ -45,7 +45,7 @@ module Cluster =
 
     let execSql hostUri sql =
         let path = Uri(hostUri, "_sql").AbsoluteUri
-        let resp = Crate.SqlClient.execute(path, new Crate.SqlRequest(sql, Array.empty))
+        let resp = Crate.SqlClient.Execute(path, new Crate.SqlRequest(sql, Array.empty))
         resp.Wait()
 
     let downloadAndCreateProcess version =

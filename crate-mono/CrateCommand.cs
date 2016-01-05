@@ -1,8 +1,6 @@
 using System;
 using System.Linq;
 using System.Data;
-using System.Data.Common;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net;
 
@@ -66,7 +64,7 @@ namespace Crate
 		{
             var server = connection.nextServer();
             try {
-                return await SqlClient.execute(
+                return await SqlClient.Execute(
                         server.sqlUri(),
                         new SqlRequest(CommandText, parameters.Select(x => x.Value).ToArray()));
             } catch (WebException) {
