@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using System;
 
-using Crate;
+using Crate.Client;
 
-namespace Crate
+namespace Crate.Client
 {
 	[TestFixture ()]
 	public class Test

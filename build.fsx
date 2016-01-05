@@ -21,7 +21,7 @@ Target "Build" (fun _ ->
 
 
 Target "RunTests" (fun _ ->
-    !! (buildDir + "/*test.dll")
+    !! (buildDir + "/Crate.*.Test.dll")
     |> NUnit (fun p ->
         { p with
             DisableShadowCopy = true

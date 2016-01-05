@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Data;
 using Dapper;
 using System.Linq;
 using NUnit.Framework;
 using Crate.Testing;
 
-namespace Crate
+namespace Crate.Client
 {
 	public class IntegrationTest
 	{

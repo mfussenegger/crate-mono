@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 
-namespace Crate {
+namespace Crate.Client {
 
     public static class SqlClient
     {

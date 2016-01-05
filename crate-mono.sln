@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crate-mono", "crate-mono\crate-mono.csproj", "{E0A6934E-93EF-485E-861F-11440F011D3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crate.Client", "crate-mono\Crate.Client.csproj", "{E0A6934E-93EF-485E-861F-11440F011D3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crate-mono-test", "crate-mono-test\crate-mono-test.csproj", "{C0FE132B-7D3E-4503-BE31-ACFA0BDB998B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crate.Client.Tests", "crate-mono-test\Crate.Client.Tests.csproj", "{C0FE132B-7D3E-4503-BE31-ACFA0BDB998B}"
 EndProject
 Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Crate.Testing", "CrateTesting\Crate.Testing.fsproj", "{56ED513A-3CE5-4A1B-AAA9-71F6AB11051A}"
 EndProject

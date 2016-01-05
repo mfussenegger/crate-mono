@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -6,7 +6,7 @@
     <ProjectGuid>{56ED513A-3CE5-4A1B-AAA9-71F6AB11051A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CrateTesting</RootNamespace>
-    <AssemblyName>CrateTesting</AssemblyName>
+    <AssemblyName>Crate.Testing</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -33,9 +33,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\4.0\Framework\v4.0\Microsoft.FSharp.Targets" />
   <ItemGroup>
-    <ProjectReference Include="..\crate-mono\crate-mono.csproj">
+    <ProjectReference Include="..\crate-mono\Crate.Client.csproj">
       <Project>{E0A6934E-93EF-485E-861F-11440F011D3F}</Project>
-      <Name>crate-mono</Name>
+      <Name>Crate.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

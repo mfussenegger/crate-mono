@@ -1,6 +1,6 @@
 using System;
 
-namespace Crate
+namespace Crate.Client
 {
 	public class SqlRequest
 	{

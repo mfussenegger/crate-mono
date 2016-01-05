@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C0FE132B-7D3E-4503-BE31-ACFA0BDB998B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>cratemonotest</RootNamespace>
-    <AssemblyName>crate-mono-test</AssemblyName>
+    <RootNamespace>Crate.Client</RootNamespace>
+    <AssemblyName>Crate.Client.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,13 +39,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\crate-mono\crate-mono.csproj">
-      <Project>{E0A6934E-93EF-485E-861F-11440F011D3F}</Project>
-      <Name>crate-mono</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CrateTesting\Crate.Testing.fsproj">
       <Project>{56ED513A-3CE5-4A1B-AAA9-71F6AB11051A}</Project>
       <Name>Crate.Testing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\crate-mono\Crate.Client.csproj">
+      <Project>{E0A6934E-93EF-485E-861F-11440F011D3F}</Project>
+      <Name>Crate.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
@@ -89,7 +89,6 @@
   <ItemGroup>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
       <Paket>True</Paket>
     </Reference>
   </ItemGroup>

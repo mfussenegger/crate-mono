@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Crate
+namespace Crate.Client
 {
 	[DebuggerDisplay("<CrateServer {Hostname}:{Port}>")]
 	public class CrateServer

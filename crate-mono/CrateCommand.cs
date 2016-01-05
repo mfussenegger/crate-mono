@@ -4,7 +4,7 @@ using System.Data;
 using System.Threading.Tasks;
 using System.Net;
 
-namespace Crate
+namespace Crate.Client
 {
 	public class CrateCommand : IDbCommand
 	{

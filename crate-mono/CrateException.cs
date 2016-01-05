@@ -1,7 +1,7 @@
 using System;
 using System.Data.Common;
 
-namespace Crate
+namespace Crate.Client
 {
 	public class CrateException : DbException
 	{

@@ -1,4 +1,4 @@
-﻿module Crate.Testing.AssemblyInfo
+module Crate.Testing.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices

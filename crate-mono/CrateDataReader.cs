@@ -3,7 +3,7 @@ using System.Data;
 using System.Xml;
 using System.Collections.Generic;
 
-namespace Crate
+namespace Crate.Client
 {
 	public class CrateDataReader : IDataReader
 	{

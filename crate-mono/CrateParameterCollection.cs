@@ -4,7 +4,7 @@ using System.Data;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Crate
+namespace Crate.Client
 {
 	public class CrateParameterCollection : List<CrateParameter>, IDataParameterCollection
 	{

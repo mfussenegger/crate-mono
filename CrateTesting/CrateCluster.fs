@@ -6,6 +6,7 @@ open System.IO
 open System.Net
 open ICSharpCode.SharpZipLib.GZip
 open ICSharpCode.SharpZipLib.Tar
+open Crate.Client
 
 
 module Cluster =
@@ -45,7 +46,7 @@ module Cluster =
 
     let execSql hostUri sql =
         let path = Uri(hostUri, "_sql").AbsoluteUri
-        let resp = Crate.SqlClient.Execute(path, new Crate.SqlRequest(sql, Array.empty))
+        let resp = SqlClient.Execute(path, new SqlRequest(sql, Array.empty))
         resp.Wait()
 
     let downloadAndCreateProcess version =
