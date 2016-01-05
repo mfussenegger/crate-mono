@@ -1,7 +1,6 @@
 namespace Crate.Testing
 
 open System.Threading
-open FSharp.Data
 open System
 open System.IO
 open System.Net
@@ -15,10 +14,8 @@ module Cluster =
         sprintf "https://cdn.crate.io/downloads/releases/crate-%s.tar.gz" version
 
     let download uri =
-        let resp = Http.Request(uri)
-        match resp.Body with
-        | Binary bytes -> bytes
-        | Text text -> failwith "expected bytes"
+        use client = new WebClient()
+        client.DownloadData(uri:string)
 
     let extract targetUri bytes =
         use ms = new MemoryStream(buffer=bytes)
@@ -48,11 +45,8 @@ module Cluster =
 
     let execSql hostUri sql =
         let path = Uri(hostUri, "_sql").AbsoluteUri
-        let body = sprintf """{"stmt": "%s"}""" sql
-        let resp = Http.Request (path, body = (TextRequest body))
-        match resp.Body with
-        | Text text -> JsonValue.Parse text
-        | Binary bytes -> failwith "expeced text response, not bytes"
+        let resp = Crate.SqlClient.execute(path, new Crate.SqlRequest(sql, Array.empty))
+        resp.Wait()
 
     let downloadAndCreateProcess version =
         let subFolder = "crate-" + version
@@ -98,6 +92,7 @@ type CrateCluster(name, version) =
                 printfn "Waiting for cluster to come online"
                 Thread.Sleep(200)
                 if proc.HasExited then
+                    printfn "%A" ex
                     let errorMessage = proc.StandardError.ReadToEnd()
                     failwith errorMessage
                 ()

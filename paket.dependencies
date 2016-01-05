@@ -2,7 +2,6 @@ source https://www.nuget.org/api/v2
 
 nuget FAKE
 nuget Dapper
-nuget FSharp.Data
 nuget NUnit ~> 2
 nuget NUnit.Runners ~> 2
 nuget SharpZipLib

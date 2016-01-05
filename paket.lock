@@ -3,8 +3,6 @@ NUGET
   specs:
     Dapper (1.42)
     FAKE (4.12.0)
-    FSharp.Data (2.2.5)
-      Zlib.Portable (>= 1.10.0) - framework: portable-net40+sl50+wp80+win80
     Microsoft.AspNet.WebApi.Client (5.2.3)
       Microsoft.Net.Http (>= 2.2.22) - framework: portable-wp80+win+net45+wp81+wpa81
       Newtonsoft.Json (>= 6.0.4) - framework: >= net45, portable-wp80+win+net45+wp81+wpa81
@@ -18,4 +16,3 @@ NUGET
     NUnit (2.6.4)
     NUnit.Runners (2.6.4)
     SharpZipLib (0.86.0)
-    Zlib.Portable (1.11.0) - framework: portable-net40+sl50+wp80+win80
