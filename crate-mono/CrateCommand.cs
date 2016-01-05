@@ -43,7 +43,7 @@ namespace Crate
 			return new CrateParameter();
 		}
 
-		public int ExecuteNonQuery() 
+		public int ExecuteNonQuery()
 		{
 			var task = ExecuteNonQueryAsync();
 			task.Wait();
@@ -64,27 +64,19 @@ namespace Crate
 
 		protected async Task<SqlResponse> execute(int currentRetry = 0)
 		{
-			using (var client = new HttpClient()) {
-				var server = connection.nextServer();
-				try {
-					var resp = await client.PostAsJsonAsync(
-						server.sqlUri(),
-						new SqlRequest(CommandText, parameters.Select(x => x.Value).ToArray())
-					);
-					if (!resp.IsSuccessStatusCode) {
-						throw new CrateException(resp.ReasonPhrase + " " + resp.Content.ReadAsStringAsync().Result);
-					}
-					return await resp.Content.ReadAsAsync<SqlResponse>();
-				} catch (WebException) {
-					connection.markAsFailed(server);
-					if (currentRetry > 3) {
-						throw ;
-					}
-				}
-				return await execute(currentRetry++);
-			}
-		}
-
+            var server = connection.nextServer();
+            try {
+                return await SqlClient.execute(
+                        server.sqlUri(),
+                        new SqlRequest(CommandText, parameters.Select(x => x.Value).ToArray()));
+            } catch (WebException) {
+                connection.markAsFailed(server);
+                if (currentRetry > 3) {
+                    throw;
+                }
+                return await execute(currentRetry++);
+            }
+        }
 
 		public async Task<IDataReader> ExecuteReaderAsync ()
 		{

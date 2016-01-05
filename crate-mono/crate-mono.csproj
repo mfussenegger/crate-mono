@@ -40,6 +40,7 @@
     <Compile Include="SqlRequest.cs" />
     <Compile Include="CrateDataReader.cs" />
     <Compile Include="SqlResponse.cs" />
+    <Compile Include="SqlClient.cs" />
     <Compile Include="CrateParameter.cs" />
     <Compile Include="CrateParameterCollection.cs" />
     <Compile Include="CrateException.cs" />
