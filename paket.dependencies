@@ -6,3 +6,7 @@ nuget NUnit ~> 2
 nuget NUnit.Runners ~> 2
 nuget SharpZipLib
 nuget Newtonsoft.Json
+nuget GeoAPI
+nuget NetTopologySuite
+nuget NetTopologySuite.IO.GeoJSON
+nuget Microsoft.AspNet.WebApi.Client

@@ -3,6 +3,8 @@ using System.Linq;
 using System.Data;
 using System.Threading.Tasks;
 using System.Net;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace Crate.Client
 {
@@ -10,8 +12,9 @@ namespace Crate.Client
 	{
 		private CrateConnection connection;
 		private CrateParameterCollection parameters = new CrateParameterCollection();
+        private List<CrateParameterCollection> bulkParameters = new List<CrateParameterCollection>();
 
-		public string CommandText { get; set; }
+        public string CommandText { get; set; }
 		public int CommandTimeout { get; set; }
 
 		public IDbConnection Connection {
@@ -62,15 +65,33 @@ namespace Crate.Client
 
 		protected async Task<SqlResponse> execute(int currentRetry = 0)
 		{
-            var server = connection.nextServer();
-            try {
-                return await SqlClient.Execute(
-                        server.sqlUri(),
-                        new SqlRequest(CommandText, parameters.Select(x => x.Value).ToArray()));
-            } catch (WebException) {
-                connection.markAsFailed(server);
-                if (currentRetry > 3) {
-                    throw;
+            using (var client = new HttpClient())
+            {
+                var server = connection.nextServer();
+                try
+                {
+                    SqlRequest req = new SqlRequest(CommandText, parameters.Select(x => x.Value).ToArray());
+                    if (bulkParameters.Count > 0)
+                    {
+                        req.bulk_args = bulkParameters.Select(x => x.Select(y => y.Value).ToArray()).ToArray();
+                    }
+
+                    var resp = await client.PostAsync(server.sqlUri(), req, new CrateMediaTypeFormatter());
+
+                    if (!resp.IsSuccessStatusCode)
+                    {
+                        throw new CrateException(resp.ReasonPhrase + " " + resp.Content.ReadAsStringAsync().Result);
+                    }
+
+                    return await resp.Content.ReadAsAsync<SqlResponse>();
+                }
+                catch (WebException)
+                {
+                    connection.markAsFailed(server);
+                    if (currentRetry > 3)
+                    {
+                        throw;
+                    }
                 }
                 return await execute(currentRetry++);
             }

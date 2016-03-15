@@ -1,2 +1,6 @@
 Newtonsoft.Json
 Dapper
+nuget GeoAPI
+nuget NetTopologySuite
+nuget NetTopologySuite.IO.GeoJSON
+nuget Microsoft.AspNet.WebApi.Client
