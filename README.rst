@@ -1,4 +1,12 @@
 ============
+Unmaintained
+============
+
+This project is not maintained, please use `npgsql-cratedb
+<https://github.com/crate/npgsql-cratedb>`_ instead.
+
+
+============
 Crate.Client
 ============
 
