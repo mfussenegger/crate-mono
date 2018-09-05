@@ -7,8 +7,8 @@ namespace Crate.Client
 {
 	public class CrateDataReader : IDataReader
 	{
-		private SqlResponse sqlResponse;
-		private int currentRow = -1;
+        internal SqlResponse sqlResponse;
+        internal int currentRow = -1;
 		private bool closed = false;
 		private readonly DateTime UNIX_DT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
